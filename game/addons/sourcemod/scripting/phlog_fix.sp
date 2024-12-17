@@ -24,8 +24,15 @@ public Plugin myinfo =
 	url			= "https://www.github.com/AndrewBetson/TF-PhlogFix/"
 };
 
-public void OnClientConnected( int Client )
+public void OnPluginStart()
 {
+	HookEvent( "player_activate", Event_PlayerActivate );
+}
+
+public void Event_PlayerActivate( Event Evt, const char[] Name, bool bDontBroadcast )
+{
+	int Client = GetClientOfUserId( Evt.GetInt( "userid" ) );
+
 	SDKHook( Client, SDKHook_OnTakeDamage, OnTakeDamage );
 	SDKHook( Client, SDKHook_OnTakeDamagePost, OnTakeDamagePost );
 }
