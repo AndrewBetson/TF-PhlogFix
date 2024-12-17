@@ -10,7 +10,7 @@
 #pragma newdecls required
 
 #if !defined PLUGIN_VERSION
-	#define PLUGIN_VERSION "1.0.0"
+	#define PLUGIN_VERSION "1.1.0"
 #endif // !defined PLUGIN_VERSION
 
 float gLastTickRageMeter[ MAXPLAYERS + 1 ] = { 0.0, ... };
