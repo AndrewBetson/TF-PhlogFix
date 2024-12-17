@@ -59,9 +59,7 @@ public Action OnTakeDamage( int Victim, int &Attacker, int &Inflictor, float &Da
 		return Plugin_Continue;
 	}
 
-	int FlamethrowerHandle = GetEntPropEnt( Attacker, Prop_Send, "m_hMyWeapons", 0 );
-	int FlamethrowerDefIdx = GetEntProp( FlamethrowerHandle, Prop_Send, "m_iItemDefinitionIndex" );
-	if ( FlamethrowerDefIdx != 594 ) // The Phlogistinator
+	if ( !ClientHasPhlog( Attacker ) ) // The Phlogistinator
 	{
 		return Plugin_Continue;
 	}
@@ -89,9 +87,7 @@ void OnTakeDamagePost(
 		return;
 	}
 
-	int FlamethrowerHandle = GetEntPropEnt( Attacker, Prop_Send, "m_hMyWeapons", 0 );
-	int FlamethrowerDefIdx = GetEntProp( FlamethrowerHandle, Prop_Send, "m_iItemDefinitionIndex" );
-	if ( FlamethrowerDefIdx != 594 ) // The Phlogistinator
+	if ( !ClientHasPhlog( Attacker ) ) // The Phlogistinator
 	{
 		return;
 	}
@@ -103,4 +99,12 @@ void OnTakeDamagePost(
 	}
 
 	SetEntPropFloat( Attacker, Prop_Send, "m_flRageMeter", gLastTickRageMeter[ Attacker ] );
+}
+
+bool ClientHasPhlog( int Client )
+{
+	int FlamethrowerHandle = GetEntPropEnt( Client, Prop_Send, "m_hMyWeapons", 0 );
+	int FlamethrowerDefIdx = GetEntProp( FlamethrowerHandle, Prop_Send, "m_iItemDefinitionIndex" );
+
+	return FlamethrowerDefIdx == 594;
 }
