@@ -39,6 +39,9 @@ public void Event_PlayerActivate( Event Evt, const char[] Name, bool bDontBroadc
 
 public void OnClientDisconnect( int Client )
 {
+	SDKUnhook( Client, SDKHook_OnTakeDamage, OnTakeDamage );
+	SDKUnhook( Client, SDKHook_OnTakeDamagePost, OnTakeDamagePost );
+
 	gLastTickRageMeter[ Client ] = 0.0;
 }
 
